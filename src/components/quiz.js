@@ -40,7 +40,6 @@ class Quiz extends Component {
 			<Navigation/>
 			<div id="quiz">
 			<div id = "a">
-
 				{this.state.quizData.map((quizdata,key) => 
 				//each quiz section
 					<div key={key} className="quiz-section" id={quizdata.id}>
