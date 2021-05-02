@@ -162,7 +162,11 @@ body{
   /*transition: all .3s ease;*/
   box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em #EC379E;
 }
-
+.display-answer{
+  padding: 5px;
+  background: #EC379E;
+  color: white;
+}
 
 /*sparkle button*/
 

@@ -52,7 +52,7 @@ class Quiz extends Component {
 							)}
 						</ul>
 						{/* here answer is displayed */}
-						<div style={{display: "none"}} id={"answer"+quizdata.id}>{quizdata.correctAnswer}</div>
+						<div className="display-answer" style={{display: "none"}} id={"answer"+quizdata.id}>{quizdata.correctAnswer}</div>
 					</div>
 				)}
 
