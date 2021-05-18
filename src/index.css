@@ -11,6 +11,12 @@ body{
   width: 100%;
   /*background: red;*/
 }
+.home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .navigation{
   height: 70px;
   background: #FD8473;

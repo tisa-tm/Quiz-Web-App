@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom'
-import Navigation from './navigation';
+// import Navigation from './navigation';
 
 class Quiz extends Component {
 
@@ -37,7 +37,7 @@ class Quiz extends Component {
 	render() {
 		return (
 			<React.Fragment>
-			<Navigation/>
+			{/* <Navigation/> */}
 			<div id="quiz">
 			<div id = "a">
 				{this.state.quizData.map((quizdata,key) => 

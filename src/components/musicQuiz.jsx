@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Quiz from './quiz';
-import quizData from './data/kpopQuizData';
+import quizData from './data/musicQuizData';
 
-class KpopQuiz extends Component {
+class MusicQuiz extends Component {
 
 	render() {
 		return (
@@ -11,4 +11,4 @@ class KpopQuiz extends Component {
 	}
 }
 
-export default KpopQuiz;
+export default MusicQuiz;
