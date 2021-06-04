@@ -174,5 +174,25 @@ body{
   color: white;
 }
 
-/*sparkle button*/
+@media (max-width: 576px){
+    body{
+        font-size: 0.9rem;
+    }
+    .quiz{
+        justify-content: center;
+        align-items: center;
+    }
+    .a{
+        margin: 0 40px;
+    }
+    .quiz-section p{
+        font-size: 1rem;
+    }
+}
 
+@media (max-width: 340px) {
+    .navigation{
+        flex-direction: column;
+        height: auto;
+    }   
+}
