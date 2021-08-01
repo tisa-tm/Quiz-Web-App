@@ -2,12 +2,15 @@ const { findOneAndUpdate } = require('../models/quiz');
 let Quiz = require('../models/quiz');
 let Score = require('../models/score');
 let User = require('../models/user');
+const jwt = require("jsonwebtoken");
 
 exports.createQuiz = async (req, res) => {
   try{
     const creatoruserid = req.body.creatoruserid;
     const questions = req.body.questions;
+    const title = req.body.title;
     const quiz = new Quiz({
+      "title": title,
       "creatoruserid": creatoruserid,
       //this not correct method
       // "questions": questions.map({})
@@ -33,18 +36,19 @@ exports.createQuiz = async (req, res) => {
 exports.displayAllQuizes = async (req, res) => {
   try{
     const quiz = await Quiz.find();
-    res.json(quiz);
+    return res.json(quiz);
   }catch(err){
-    res.json(err);
+    return res.json(err);
   }
 };
 
 exports.getQuiz = async (req, res) => {
   try{
     const quiz = await Quiz.findById(req.params.quizid);
-    res.json(quiz);
+    const user = await User.findById(quiz.creatoruserid);
+    return res.json({"quiz": quiz, "user": user});
   }catch(err){
-    res.json("Error is:"+err);
+    return res.json("Error is:"+err);
   }
 }
 
@@ -89,6 +93,7 @@ exports.getAllQuizesCreatedByUser = async (req, res, next) => {
   try{
     // const quiz = await User.find({username: req.params.userid}).populate("quizesCreated");
     const quiz = await User.findById(req.params.userid).populate("quizzesCreated");
+    console.log(req.username);
     res.json(quiz);
   }catch(err){
     res.json(err);
@@ -100,3 +105,12 @@ exports.deleteAllQuizes = async(req,res) => {
   res.send("ahahha");
 }
 
+exports.send = async (req, res, next) => {
+  console.log("cookie set")
+  return res.cookie("loggedin", "true");
+  ;
+}
+
+exports.read = async (req, res) => {
+  res.send(req.cookies);
+}

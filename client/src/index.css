@@ -4,7 +4,7 @@ body{
   font-size: 20px;
 
 }
-#quiz{
+#quiz-card-holder{
     display: flex;
   flex-direction: column;
   align-items: center;

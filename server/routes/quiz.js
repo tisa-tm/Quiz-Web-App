@@ -1,13 +1,16 @@
 const router = require('express').Router();
 const handle = require('../handlers/quiz');
+const auth = require('../middleware/auth');
 
-router.get('/', handle.displayAllQuizes);
-router.post('/createquiz', handle.createQuiz);
-router.get('/getquiz/:quizid',handle.getQuiz);
-router.post('/submitquiz',handle.setScore);
-router.get('/getuserquizes/:userid',handle.getAllQuizesTakenByUser);
-router.get('/getusercreatedquizes/:userid',handle.getAllQuizesCreatedByUser);
-router.delete('/deleteallquizes',handle.deleteAllQuizes);
+router.get('/', auth, handle.displayAllQuizes);
+router.post('/createquiz', auth, handle.createQuiz);
+router.get('/getquiz/:quizid',auth, handle.getQuiz);
+router.post('/submitquiz',auth, handle.setScore);
+router.get('/getuserquizes/:userid',auth, handle.getAllQuizesTakenByUser);
+router.get('/getusercreatedquizes/:userid',auth, handle.getAllQuizesCreatedByUser);
+router.delete('/deleteallquizes',auth, handle.deleteAllQuizes);
+router.get('/send',handle.send);
+router.get('/read', handle.read);
 
 module.exports = router;
 

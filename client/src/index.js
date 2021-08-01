@@ -4,6 +4,9 @@ import './index.css';
 import Main from './components/main';
 
 ReactDOM.render(
-  		<Main/>,
+	// <BrowserRouter>
+		<Main/>
+	// </BrowserRouter>
+  		,
   		document.getElementById('root')
 );

@@ -1,0 +1,77 @@
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import '../component-styles/quizDescription.css';
+import {
+    Route,
+    NavLink,
+    HashRouter
+  } from "react-router-dom";
+import Quiz from './quiz';
+
+
+const AllQuizes = () =>{
+    const [quizid,setquizid] = useState('');
+    const [quizes,setquizes] = useState([{}]);
+
+    useEffect(() => {
+		async function getQuizes() {
+			try{
+				const res = await axios.get('http://localhost:5000/quiz');
+				await setquizes(res.data);
+			}
+			catch(err){
+				console.log(err);
+			}
+		};
+		getQuizes();
+	},[]);
+
+    const click = (id) =>{
+        setquizid(id);
+        document.getElementById("all-quiz-card-holder").style.display = "none";
+        document.getElementById("quiz-display").style.display = "flex";
+        // console.log(id);
+    }
+
+    return( 
+        <div>
+        {/* <HashRouter> */}
+            <div id="all-quiz-card-holder">
+                {quizes.map((quiz, key) =>
+                <div key={key} className="all-quiz-card">
+                    <h4>{quiz.title}</h4>
+                    <p>{quiz.creatoruserid}</p>     
+                    {/* <NavLink to="/thisquiz" onClick={click}>View</NavLink> */}
+                    <button onClick={() => click(quiz._id)}>here</button>
+                </div>
+                )}
+            </div>
+            
+           <div id="quiz-display">
+                <Quiz quizid={quizid}/>
+           </div>
+
+        {/* </HashRouter> */}
+        </div>
+
+    );
+}
+
+export default AllQuizes;
+
+
+            <HashRouter>
+                <div className="navigation">
+                    <NavLink to="/" className="navigation-link">Home</NavLink>
+                    <NavLink quizid="60fcf0f3b55bab18d841e4c3" className="navigation-link" 
+                        to={{
+                            pathname:'/thisquiz',                        
+                            state: "60fcf0f3b55bab18d841e4c3" 
+                        }} exact>Quiz</NavLink>
+                </div>
+
+                <div>
+                    <Route default exact path="/" component={Home}></Route>
+                    <Route path="/thisquiz" component={Quiz}></Route>
+                </div>
+        </HashRouter>
