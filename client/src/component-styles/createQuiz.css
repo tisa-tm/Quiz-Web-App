@@ -1,0 +1,50 @@
+#title{
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: chartreuse; */
+}
+
+#question-form{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#question-form button, #title button{
+    height: 50px;
+    width: 100px;
+    border-radius: 10px; 
+    color: white;
+    border: none;
+    background-image: linear-gradient(to right, #FD8473 0%, #F8196D 50%, #FD8473 100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+}
+#question-form button:hover, #title button:hover{
+    background-position: right center;
+}
+#question-form form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    line-height: 1.5;
+}
+#question-form input, #title input{
+    border-radius: 10px;
+    width: 50%;
+    height: 40px;
+    border: 0.05px solid gainsboro;
+}
+#submit-quiz-button{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: #F8196D !important;
+}
+#submit-quiz-button:hover{
+    background: #FD8473 !important;
+}

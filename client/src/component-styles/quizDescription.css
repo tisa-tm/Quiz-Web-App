@@ -1,0 +1,15 @@
+#all-quiz-card-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.all-quiz-card{
+    border: 0.5px solid gainsboro;
+    border-radius: 10px;
+    width: 50%;
+    padding: 20px;
+}
+
+#quiz-display{
+    /* display: none; */
+}
