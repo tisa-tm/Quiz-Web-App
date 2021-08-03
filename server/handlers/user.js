@@ -31,7 +31,7 @@ exports.register = async (req, res, next) => {
         "password": password
     });
     const userRet = await user.save();  
-    const token = jwt.sign( {username: username}, process.env.SECRET, { expiresIn: "1d" } );
+    const token = jwt.sign( {id: user._id,username: username}, process.env.SECRET, { expiresIn: "1d" } );
     res.status(201).json(userRet)
         .cookie("token",token, { httpOnly: true, maxAge: 86400000, secure: true, sameSite: true})
     }catch(err) {
@@ -47,14 +47,10 @@ exports.login = async (req, res, next) => {
     if(!user) return res.status(500).json({message: "user doesn't exist"});
     //comparing hash of entered password and stored hash value 
     if(await bcrypt.compare(password,user.password)){
-      const token = await jwt.sign( {username: username}, process.env.SECRET, { expiresIn: '1d' } );
-      console.log("user logged in "+token);
+      const token = await jwt.sign( {id: user._id,username: username}, process.env.SECRET, { expiresIn: '1d' } );
       return res.status(200)
                 .cookie("token",token,{maxAge: 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: true})//,{httpOnly: true, maxAge: 24 * 60 * 60 * 1000, secure: true, sameSite: none})//maxAge: 24 * 60 * 60 * 1000, 
                 .json({message: "user valid"});
-                // .json(user);
-                // .redirect("http://localhost:3000/");
-
     }
     else{
       return res.status(500).json({message:"Enter password again"});
@@ -75,8 +71,9 @@ exports.getCurrentUser = async (req, res) => {
     if (!token)
       return res.json({message: "User logged out"});
     const decoded = await jwt.verify(token, process.env.SECRET);
-    loggedInUser = await decoded?.username;
-    return res.json({user: loggedInUser});
+    username = await decoded?.username;
+    userid = await decoded?.id;
+    return res.json({user: username, userid: userid});
   }catch(err){
     console.log(err);
   }

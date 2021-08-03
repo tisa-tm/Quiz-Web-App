@@ -11,6 +11,7 @@ const quizSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },//many to one
+    creatorusername: String,
     title: String,
     questions: [questionSchema]
 });

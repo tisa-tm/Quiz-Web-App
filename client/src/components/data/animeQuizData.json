@@ -1,0 +1,37 @@
+{
+	"title": "Anime Quiz",
+	"creatoruserid": "61024888cc33a836b4d84a59",
+	"creatorusername": "rose",
+	"questions":  [
+	{
+		"question": "Who uses Rasengan?",
+		"answers": ["Sakura","Hinata","Shikamaru","Naruto"],
+		"correctAnswer": "Naruto"
+	},
+	{
+		"question": "Who is humanity's strongest?",
+		"answers": ["Sasuke","Ichigo","Levi","Eric"],
+		"correctAnswer": "Levi"
+	},
+	{
+		"question": "What quirk did Midoriya have at the beinning of the series?",
+		"answers": ["Fireball","None","Invisibility", "Flying"],
+		"correctAnswer": "None"
+	},
+	{
+		"question": "Which anime does Kuro Sensei belong to?",
+		"answers": ["Naruto","Attack on Titans","Assasination Classroom","Psycho Pass"],
+		"correctAnswer": "Assasination Classroom"
+	},
+	{
+		"question": "Which of these is an anime about ninjas?",
+		"answers": ["Naruto","Attack on Titans","Assasination Classroom","Psycho Pass"],
+		"correctAnswer": "Naruto"
+	},
+	{
+		"question": "Which of these is an anime about super heros?",
+		"answers": ["My Hero Acaademia","Attack on Titans","Assasination Classroom","Psycho Pass"],
+		"correctAnswer": "My Hero Acaademia"
+	}
+]
+}

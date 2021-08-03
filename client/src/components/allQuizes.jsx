@@ -6,32 +6,24 @@ import {
     HashRouter,
   } from "react-router-dom";
 
-const AllQuizes = () =>{
+const AllQuizes = (props) =>{
     // const [quizid,setquizid] = useState('');
+    let currentuserid = props.match.params.currentuserid;
+    let currentusername = props.match.params.currentusername;
     const [quizes,setquizes] = useState([{}]);
-    const isMounted = useRef(true);
 
     useEffect(() => {
 		async function getQuizes() {
 			try{
 				const res = await axios.get('http://localhost:5000/quiz',{withCredentials: true});
-                if(isMounted.current){
-                    await setquizes(res.data);
-                }
+                await setquizes(res.data);
 			}
 			catch(err){
 				console.log(err);
 			}
-            return(() => {
-                isMounted.current = false;
-            })
 		};
 		getQuizes();
 	},[]);
-
-    // const click = (id) =>{
-    //     setquizid(id);
-    // }
 
     return( 
         <div>
@@ -40,9 +32,9 @@ const AllQuizes = () =>{
                 {quizes.map((quiz, key) =>
                 <div key={key} className="all-quiz-card">
                     <h4>{quiz.title}</h4>
-                    <p>{quiz.creatoruserid}</p>     
+                    <p>By: {quiz.creatorusername}</p>     
                     <NavLink to={{
-                                    pathname: "/thisquiz/"+quiz._id
+                                    pathname: "/thisquiz/"+quiz._id+"/"+currentuserid+"/"+currentusername
                                 }}>View</NavLink>
                 </div>
                 )}

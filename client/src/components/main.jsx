@@ -11,6 +11,9 @@ import Register from './register';
 import Login from './login';
 import AllQuizes from './allQuizes';
 import CreateQuiz from './createQuiz';
+import QuizesCreated from './quizesCreated';
+import QuizesTaken from './quizesTaken';
+import Profile from './profile';
 
 class Main extends Component{
     // currentUser = "";
@@ -22,8 +25,6 @@ class Main extends Component{
         this.setState({
             currentUser: res.data
         })
-        console.log("The data is "+this.state.currentUser.user);
-        console.log(res.data.user);
     }
     async logout(){
         const res = await axios.get('http://localhost:5000/user/logout', {withCredentials: true});
@@ -33,22 +34,28 @@ class Main extends Component{
     }
     render(){
         let user = this.state.currentUser.user;
+        let userid = this.state.currentUser.userid;
         if(user){
             return(
                 <HashRouter>
                     <nav className="navigation">
                         <NavLink to="/" className="navigation-link">Home</NavLink>
-                        <NavLink to="/getquiz" className="navigation-link">Get Quiz</NavLink>
-                        <NavLink to="/createquiz" className="navigation-link">Create Quiz</NavLink>
-                        <span className="navigation-link">{this.state.currentUser.user}</span>
+                        <NavLink to={{pathname: "/getquiz/"+userid+"/"+user}}className="navigation-link">Get Quiz</NavLink>
+                        <NavLink to={{pathname: "/createquiz/"+userid+"/"+user}} className="navigation-link">Create Quiz</NavLink>
+                        {/* <NavLink to={{pathname: "/quizescreated/"+userid}} className="navigation-link">Quizes Created</NavLink> */}
+                        {/* <NavLink to={{pathname: "/quizestaken/"+userid}} className="navigation-link">Quizes Taken</NavLink> */}
+                        <NavLink to={{pathname: "/userprofile/"+userid+"/"+user}} className="navigation-link">{this.state.currentUser.user}</NavLink>
                         <button onClick={this.logout}>Logout</button>
                     </nav>
     
                     <div>
                         <Route default exact path="/" component={Home}></Route>
-                        <Route path="/thisquiz/:quizid" component={Quiz}></Route>
-                        <Route path="/getquiz" component={AllQuizes}></Route>
-                        <Route path="/createquiz" component={CreateQuiz}></Route>
+                        <Route path="/thisquiz/:quizid/:currentuserid/:currentusername" component={Quiz}></Route>
+                        <Route path="/getquiz/:currentuserid/:currentusername" component={AllQuizes}></Route>
+                        <Route path="/createquiz/:currentuserid/:currentusername" component={CreateQuiz}></Route>
+                        <Route path="/userprofile/:currentuserid/:currentusername" component={Profile}></Route>
+                        <Route path="/quizescreated/:currentuserid/:currentusername" component={QuizesCreated}></Route>
+                        <Route path="/quizestaken/:currentuserid/:currentusername" component={QuizesTaken}></Route>
                     </div>
             </HashRouter>
             );

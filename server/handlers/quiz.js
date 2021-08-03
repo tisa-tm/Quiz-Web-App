@@ -6,14 +6,11 @@ const jwt = require("jsonwebtoken");
 
 exports.createQuiz = async (req, res) => {
   try{
-    const creatoruserid = req.body.creatoruserid;
-    const questions = req.body.questions;
-    const title = req.body.title;
+    const {creatoruserid, creatorusername, questions, title} = req.body
     const quiz = new Quiz({
       "title": title,
       "creatoruserid": creatoruserid,
-      //this not correct method
-      // "questions": questions.map({})
+      "creatorusername": creatorusername,
       "questions": questions
     });
     const createdquiz = await quiz.save();
@@ -54,15 +51,34 @@ exports.getQuiz = async (req, res) => {
 
 exports.setScore = async (req, res) => {
   try{
-  const quizid = req.body.quizid;
-  const userid = req.body.userid;
-  const score = req.body.score;
+  const {quizid, userid, score, username} = req.body;
+  const oldScore = await Score.findOne({quizid, userid});
   const scoreObj = new Score({
     "quizid": quizid,
     "userid": userid,
+    "username": username,
     "score": score,
   });
-  const scoreObjRet = await scoreObj.save();
+  //should keep highest score if already exists
+  if(oldScore){
+    //don't update if the old score is higher
+    if(score<oldScore.score){
+      return
+    }
+    else{
+      //update if current scire is higher
+      await Score.findOneAndUpdate(
+        {userid,quizid},
+        {
+          score: score
+        }
+        );
+    }
+  }
+  else{
+    //create new record if quiz not taken before thus old score not present
+    const scoreObjRet = await scoreObj.save();
+  }
   //after saving quiz, method to add the quiz id to user's quiz taken array
   await User.findOneAndUpdate(
     {_id: userid},
@@ -79,22 +95,62 @@ exports.setScore = async (req, res) => {
   }
 }
 
-exports.getAllQuizesTakenByUser = async(req, res) => {
+exports.showAllScores = async(req,res) => {
   try{
-    // const quiz = await Quiz.find({username: req.params.username}).populate("quizesTaken");
-    const quiz = await User.findById(req.params.userid);
-    res.json(quiz);
+    const score = await Score.find();
+    return res.json(score);
   }catch(err){
-    res.json(err);
+    return res.json(err);
   }
 }
 
-exports.getAllQuizesCreatedByUser = async (req, res, next) => {
+exports.deleteAllScores = async(req,res) => {
   try{
-    // const quiz = await User.find({username: req.params.userid}).populate("quizesCreated");
-    const quiz = await User.findById(req.params.userid).populate("quizzesCreated");
-    console.log(req.username);
-    res.json(quiz);
+    const score = await Score.deleteMany({});
+    return res.send("Deleted");
+  }catch(err){
+    return res.json(err);
+  }
+}
+
+exports.getAllQuizesTakenByUser = async(req, res) => {
+  try{
+    let userid = req.params.userid;
+    const quizes = await User.findById(userid);
+    const quizesTaken = await Quiz.find( { _id : { $in : quizes.quizesTaken}});
+    quizesTakenArray = [];
+    for(const quiz of quizesTaken){
+      let quizid = quiz._id;
+      const score = await Score.findOne({quizid, userid});
+      const q = {
+        "_id": quizid,
+        "title": quiz.title,
+        "creatorusername": quiz.creatorusername,
+        "score": score.score
+      };
+      quizesTakenArray.push(q);
+    }
+    return res.json(quizesTakenArray); 
+  }catch(err){
+    return res.json(err);
+  }
+}
+
+exports.getScore = async (req,res) => {
+  const {quizid,userid} = body.req;
+  try {
+    const score = await Score.findOne({quizid, userid});
+    return res.json(score.score);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+exports.getAllQuizesCreatedByUser = async (req, res) => {
+  try{
+    const quizes = await User.findById(req.params.userid);
+    const quizesCreated = await Quiz.find( { _id : { $in : quizes.quizesCreated}});
+    return res.json(quizesCreated);
   }catch(err){
     res.json(err);
   }

@@ -1,77 +1,74 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import '../component-styles/quizDescription.css';
-import {
-    Route,
-    NavLink,
-    HashRouter
-  } from "react-router-dom";
-import Quiz from './quiz';
+{question.map((quizdata,key) => 
+				//each quiz section
+					<div key={key} className="quiz-section" id={quizdata.id}>
+						{/* question */}
+						<p>{quizdata.question}</p>
+						{/* answer */}
+						<ul className="custom-radio">
+							{quizdata.answers.map(answer =>
+								<li key={answer+quizdata._id} className="radio-list"><input type="radio" name={"group"+quizdata._id} className={answer} id={answer+quizdata._id}/><label htmlFor={answer+quizdata._id}>{answer}</label></li>
+							)}
+						</ul>
+						{/* here answer is displayed */}
+						<div className="display-answer" style={{display: "none"}} id={"answer"+quizdata._id}>{quizdata.correctAnswer}</div>
+					</div>
+				)}
+
+				<div id="score-cont" className="score-container">
+					<p className="score-text" id="score">The score is {score}</p>
+				</div>
+				
+				<button id="check" onClick={check}>Check</button>
 
 
-const AllQuizes = () =>{
-    const [quizid,setquizid] = useState('');
-    const [quizes,setquizes] = useState([{}]);
-
-    useEffect(() => {
-		async function getQuizes() {
-			try{
-				const res = await axios.get('http://localhost:5000/quiz');
-				await setquizes(res.data);
-			}
-			catch(err){
-				console.log(err);
-			}
-		};
-		getQuizes();
-	},[]);
-
-    const click = (id) =>{
-        setquizid(id);
-        document.getElementById("all-quiz-card-holder").style.display = "none";
-        document.getElementById("quiz-display").style.display = "flex";
-        // console.log(id);
-    }
-
-    return( 
-        <div>
-        {/* <HashRouter> */}
-            <div id="all-quiz-card-holder">
-                {quizes.map((quiz, key) =>
-                <div key={key} className="all-quiz-card">
-                    <h4>{quiz.title}</h4>
-                    <p>{quiz.creatoruserid}</p>     
-                    {/* <NavLink to="/thisquiz" onClick={click}>View</NavLink> */}
-                    <button onClick={() => click(quiz._id)}>here</button>
-                </div>
-                )}
-            </div>
-            
-           <div id="quiz-display">
-                <Quiz quizid={quizid}/>
-           </div>
-
-        {/* </HashRouter> */}
-        </div>
-
-    );
-}
-
-export default AllQuizes;
 
 
-            <HashRouter>
-                <div className="navigation">
-                    <NavLink to="/" className="navigation-link">Home</NavLink>
-                    <NavLink quizid="60fcf0f3b55bab18d841e4c3" className="navigation-link" 
-                        to={{
-                            pathname:'/thisquiz',                        
-                            state: "60fcf0f3b55bab18d841e4c3" 
-                        }} exact>Quiz</NavLink>
-                </div>
 
-                <div>
-                    <Route default exact path="/" component={Home}></Route>
-                    <Route path="/thisquiz" component={Quiz}></Route>
-                </div>
-        </HashRouter>
+{question.map((quizdata,key) => 
+				//each quiz section
+					<div key={key} className="quiz-section" id={quizdata._id}>
+						{/* question */}
+						<p>{quizdata.question}</p>
+						{/* answer */}
+						<ul className="custom-radio">
+							{quizdata.answers.map(answer =>
+								<li key={answer+quizdata._id} className="radio-list"><input type="radio" name={"group"+quizdata._id} className={answer} id={answer+quizdata._id}/><label htmlFor={answer+quizdata._id}>{answer}</label></li>
+							)}
+						</ul>
+						{/* here answer is displayed */}
+						<div className="display-answer" style={{display: "none"}} id={"answer"+quizdata._id}>{quizdata.correctAnswer}</div>
+					</div>
+				)}
+
+				<div id="score-cont" className="score-container">
+					<p className="score-text" id="score">The score is {score}</p>
+				</div>
+				
+				<button id="check" onClick={check}>Check</button>
+
+
+
+
+<div id = "a">
+			{question.map((quizdata,key) => 
+				//each quiz section
+					<div key={key} className="quiz-section" id={quizdata.id}>
+						{/* question */}
+						<p>{quizdata.question}</p>
+						{/* answer */}
+						<ul className="custom-radio">
+							{quizdata.answers.map(answer =>
+								<li key={answer+quizdata._id} className="radio-list"><input type="radio" name={"group"+quizdata._id} className={answer} id={answer+quizdata._id}/><label htmlFor={answer+quizdata._id}>{answer}</label></li>
+							)}
+						</ul>
+						{/* here answer is displayed */}
+						<div className="display-answer" style={{display: "none"}} id={"answer"+quizdata._id}>{quizdata.correctAnswer}</div>
+					</div>
+				)}
+
+				<div id="score-cont" className="score-container">
+					<p className="score-text" id="score">The score is {score}</p>
+				</div>
+				
+				<button id="check" onClick={check}>Check</button>
+			</div>

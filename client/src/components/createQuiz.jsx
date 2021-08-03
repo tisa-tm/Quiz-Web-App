@@ -4,6 +4,9 @@ import '../component-styles/createQuiz.css';
 
 class CreateQuiz extends Component {
 
+  currentuserid = this.props.match.params.currentuserid;
+  currentusername = this.props.match.params.currentusername;
+
   constructor(props) {
     super(props);
     this.onChangeTitle=this.onChangeTitle.bind(this);
@@ -74,7 +77,8 @@ class CreateQuiz extends Component {
     }
     //create a quiz object to send to db/server
     const quiz = {
-      "creatoruserid": "60f3aeb494f9b2301cbcae40",//get the current logged in user
+      "creatoruserid": this.currentuserid,//get the current logged in user
+      "creatorusername": this.currentusername,
       "title": this.state.title,
       "questions": this.questions
     }

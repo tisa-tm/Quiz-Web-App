@@ -9,6 +9,7 @@ const scoreSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }, 
+    username: String,
     score: {
         type: Number,
         default: 0
