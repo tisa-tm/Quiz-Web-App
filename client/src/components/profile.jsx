@@ -3,6 +3,7 @@ import {
     NavLink,
     HashRouter, 
   } from "react-router-dom";
+import "../component-styles/profile.css";
 
 class Profile extends Component {
 
@@ -11,12 +12,16 @@ class Profile extends Component {
 
 	render() {
 		return (
-            <div>
-                <HashRouter>
-                    <NavLink to={{pathname: "/quizescreated/"+this.userid+"/"+this.username}}>Quizes Created</NavLink> 
-                    <NavLink to={{pathname: "/quizestaken/"+this.userid+"/"+this.username}}>Quizes Taken</NavLink>
-                </HashRouter>
-            </div>
+            <HashRouter>
+                <div className="profile-holder">  
+                    <div className="profile-quiz-card">
+                        <NavLink className="links" to={{pathname: "/quizescreated/"+this.userid+"/"+this.username}}>Quizes Created</NavLink> 
+                    </div>
+                    <div className="profile-quiz-card">
+                        <NavLink className="links" to={{pathname: "/quizestaken/"+this.userid+"/"+this.username}}>Quizes Taken</NavLink>     
+                    </div>
+                </div>
+            </HashRouter>
 	    );
 	}
 }

@@ -1,198 +1,53 @@
 body{
   margin: 0;
   padding: 0;
-  font-size: 20px;
+  font-size: 1rem;
+}
 
-}
-#quiz-card-holder{
-    display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  /*background: red;*/
-}
 .home{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 85vh;
 }
 .navigation{
   height: 70px;
   background: #FD8473;
   width: 100%;
+  display: flex;
 }
-
+.float-right{
+  margin-left: auto;
+}
 .navigation-link{
   text-decoration: none;
   line-height: 70px;
   padding: 0 30px;
   color: white;
 }
-
 .navigation-link:hover{
   color: #E7CE7C;
 }
-.answer{
-	display: none;
-}
-.quiz-section{
-  margin: 50px 0;
-}
-
-.quiz-section p{
-  font-size: 25px;
-}
-
-.score-container{
-/*  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  position: absolute;*/
-  background: #572790;
-  font-size: 40px;
+.logout-button{
+  text-decoration: none;
+  line-height: 70px;
+  padding: 0 30px;
   color: white;
-  height: 200px;
-  width: 30%;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 3% 0;
-  display: none;
-}
-
-#check{
-  height: 70px;
-  width: 200px;
-  padding: 10px 20px;
-  color: white;
+  background: transparent;
   border: none;
-  margin-bottom: 40px;
-  background-image: linear-gradient(to right, #FD8473 0%, #F8196D 50%, #FD8473 100%);
-  transition: 0.5s;
-  background-size: 200% auto;
-  font-size: 30px;
+  text-align: left;
 }
 
-#check:hover{
-     background-position: right center;
-}
-
-.cardNavigation{
-  display: inline-flex;
-  flex-wrap: wrap;
-  height: 500px;
-  width: 70%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  position: absolute;
-}
-
-.card{
-  text-decoration: none;
-  color: white;
-  flex-basis: 45%;
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(to bottom right, #FD8473 0%, #F8196D 50%, #FD8473 100%);
-  background-size: 300% 300%;
-  transition: 0.5s background-position;
-  position: relative;
-}
-.card:hover{ 
-  background-position: right center;
-}
-.card-text{
-  font-size: 30px;
-  text-decoration: none;
-  color: white;
-}
-
-
-
-.custom-radio{
-  list-style: none;
-}
-.radio-list{
-  margin: 10px 0;
-  height: 1.5em;
-  /*border: solid gray 1px;*/
-}
-.custom-radio input[type="radio"]{
-  /*display: none;*/
-  opacity: 0;
-}
-.custom-radio input[type="radio"] + label{
-  position: relative;
-  display: inline-block;
-  padding-left: 4em;
-  cursor: pointer;
-  /*line-height: 0.75em;*/
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-/*designing fake radio button*/
-.custom-radio input[type="radio"] + label:before{
-/*.custom-radio input[type="radio"] + label:after{*/
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1.5em;
-  height: 1.5em;
-  text-align: center;
-  color: #FD8473;
-  font-family: Times;
-  border-radius: 20%;
-  border: solid #EC379E 1px;
-  transition: all .3s ease;
-}
-.custom-radio input[type="radio"] + label:before {
-  transition: all .3s ease;
-  box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em white;
-}
-.custom-radio input[type="radio"] + label:hover:before {
-  transition: all .3s ease;
-  box-shadow: inset 0 0 0 0.3em white, inset 0 0 0 1em #EC379E;
-}
-.custom-radio input[type="radio"]:checked + label:before {
-  /*transition: all .3s ease;*/
-  box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em #EC379E;
-}
-.display-answer{
-  padding: 5px;
-  background: #EC379E;
-  color: white;
-}
 
 @media (max-width: 576px){
     body{
-        font-size: 0.9rem;
+      font-size: 0.9rem;
     }
-    .quiz{
-        justify-content: center;
-        align-items: center;
-    }
-    .a{
-        margin: 0 40px;
-    }
-    .quiz-section p{
-        font-size: 1rem;
-    }
+    .navigation{
+      flex-direction: column;
+      height: auto;
+  }   
 }
 
-@media (max-width: 340px) {
-    .navigation{
-        flex-direction: column;
-        height: auto;
-    }   
-}
+

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import '../component-styles/loginandregister.css';
 
 class Register extends Component {
     constructor(props) {
@@ -57,15 +58,23 @@ class Register extends Component {
 
     render(){
         return (
-            <form onSubmit={this.onSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input type="text" name="username" placeholder={this.state.username} onChange={this.onChangeUsername} required/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" placeholder={this.state.password} onChange={this.onChangePassword} required/>
-                <label htmlFor="password">Confirm Password</label>
-                <input type="password" name="confirmpassword" placeholder={this.state.confirmPassword} onChange={this.onChangeConfirmPassword} required/>
-                <button type="submit">Register</button>
-            </form>
+            <div className="form-holder">
+                <form onSubmit={this.onSubmit}>
+                    <div>
+                        <label htmlFor="username">Username:</label>
+                        <input type="text" name="username" placeholder={this.state.username} onChange={this.onChangeUsername} required/>
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password:</label>
+                        <input type="password" name="password" placeholder={this.state.password} onChange={this.onChangePassword} required/>
+                    </div>
+                    <div>
+                        <label htmlFor="password">Confirm Password:</label>
+                        <input type="password" name="confirmpassword" placeholder={this.state.confirmPassword} onChange={this.onChangeConfirmPassword} required/>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
         );
     }
 }

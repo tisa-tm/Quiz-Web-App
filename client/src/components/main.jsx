@@ -40,12 +40,12 @@ class Main extends Component{
                 <HashRouter>
                     <nav className="navigation">
                         <NavLink to="/" className="navigation-link">Home</NavLink>
-                        <NavLink to={{pathname: "/getquiz/"+userid+"/"+user}}className="navigation-link">Get Quiz</NavLink>
-                        <NavLink to={{pathname: "/createquiz/"+userid+"/"+user}} className="navigation-link">Create Quiz</NavLink>
-                        {/* <NavLink to={{pathname: "/quizescreated/"+userid}} className="navigation-link">Quizes Created</NavLink> */}
-                        {/* <NavLink to={{pathname: "/quizestaken/"+userid}} className="navigation-link">Quizes Taken</NavLink> */}
-                        <NavLink to={{pathname: "/userprofile/"+userid+"/"+user}} className="navigation-link">{this.state.currentUser.user}</NavLink>
-                        <button onClick={this.logout}>Logout</button>
+                        <NavLink to={{pathname: "/getquiz/"+userid+"/"+user}}className="navigation-link">Quizes</NavLink>
+                        <NavLink to={{pathname: "/createquiz/"+userid+"/"+user}} className="navigation-link">Create</NavLink>
+                        <div class="float-right">
+                            <NavLink to={{pathname: "/userprofile/"+userid+"/"+user}} className="navigation-link">{this.state.currentUser.user}</NavLink>
+                            <button onClick={this.logout} className="logout-button">Logout</button>
+                        </div>
                     </nav>
     
                     <div>
@@ -65,8 +65,10 @@ class Main extends Component{
                 <HashRouter>
                     <nav className="navigation">
                         <NavLink to="/" className="navigation-link">Home</NavLink>
-                        <NavLink to="/register" className="navigation-link">Register</NavLink>
-                        <NavLink to="/login" className="navigation-link">Login</NavLink>                       
+                        <div class="float-right">
+                            <NavLink to="/register" className="navigation-link">Register</NavLink>
+                            <NavLink to="/login" className="navigation-link">Login</NavLink> 
+                        </div>                         
                     </nav>
     
                     <div>

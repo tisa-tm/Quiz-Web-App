@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
-import '../component-styles/quizDescription.css';
+import '../component-styles/allQuizes.css';
 import {
     NavLink,
     HashRouter,
@@ -33,7 +33,7 @@ const AllQuizes = (props) =>{
                 <div key={key} className="all-quiz-card">
                     <h4>{quiz.title}</h4>
                     <p>By: {quiz.creatorusername}</p>     
-                    <NavLink to={{
+                    <NavLink className="links" to={{
                                     pathname: "/thisquiz/"+quiz._id+"/"+currentuserid+"/"+currentusername
                                 }}>View</NavLink>
                 </div>

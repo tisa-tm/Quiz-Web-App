@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
+import '../component-styles/quiz.css';
 
 const Quiz = (props) => {
 	let questionArray = [];

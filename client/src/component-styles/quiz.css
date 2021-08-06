@@ -1,0 +1,111 @@
+#quiz-card-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.answer{
+	display: none;
+}
+.quiz-section{
+  margin: 50px 0;
+}
+.quiz-section p{
+  font-size: 25px;
+}
+
+#check{
+    height: 70px;
+    width: 200px;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    margin-bottom: 40px;
+    background-image: linear-gradient(to right, #FD8473 0%, #F8196D 50%, #FD8473 100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 30px;
+}
+#check:hover{
+    background-position: right center;
+}
+
+.score-container{
+    background: #572790;
+    font-size: 40px;
+    color: white;
+    height: 200px;
+    width: 30%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3% 0;
+    display: none;
+}
+
+.display-answer{
+    padding: 5px;
+    background: #EC379E;
+    color: white;
+}
+
+@media (max-width: 576px){   
+    .quiz{
+        justify-content: center;
+        align-items: center;
+    }
+    .a{
+        margin: 0 40px;
+    }
+    .quiz-section p{
+        font-size: 1rem;
+    }
+}
+
+.custom-radio{
+    list-style: none;
+}
+.radio-list{
+    margin: 10px 0;
+    height: 1.5em;
+}
+.custom-radio input[type="radio"]{
+    opacity: 0;
+}
+.custom-radio input[type="radio"] + label{
+    position: relative;
+    display: inline-block;
+    padding-left: 4em;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+/*designing fake radio button*/
+.custom-radio input[type="radio"] + label:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    color: #FD8473;
+    font-family: Times;
+    border-radius: 20%;
+    border: solid #EC379E 1px;
+    transition: all .3s ease;
+}
+.custom-radio input[type="radio"] + label:before {
+    transition: all .3s ease;
+    box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em white;
+}
+.custom-radio input[type="radio"] + label:hover:before {
+    transition: all .3s ease;
+    box-shadow: inset 0 0 0 0.3em white, inset 0 0 0 1em #EC379E;
+}
+.custom-radio input[type="radio"]:checked + label:before {
+    box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em #EC379E;
+}
+

@@ -1,0 +1,33 @@
+.form-holder{
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+}
+.form-holder form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-holder form *{
+    margin: 10px 0 10px 0;
+}
+.form-holder input{
+    border-radius: 10px;
+    height: 40px;
+    border: 0.05px solid gainsboro;
+    margin-left: 10px;
+}
+.form-holder button{
+    height: 50px;
+    width: 100px;
+    border-radius: 10px; 
+    color: white;
+    border: none;
+    background-image: linear-gradient(to right, #FD8473 0%, #F8196D 50%, #FD8473 100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+}
+.form-holder button:hover{
+    background-position: right center;
+}

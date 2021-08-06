@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import '../component-styles/quizDescription.css';
+import '../component-styles/allQuizes.css';
 import axios from 'axios';
 import {
     NavLink,
@@ -47,7 +47,7 @@ const ShowQuizList = (props) =>{
                         <p>By: {quiz.creatorusername}</p>  
                         {/* {showScore(quiz._id)} */}
                         <p>Score: {quiz.score}</p>
-                        <NavLink to={{
+                        <NavLink className="links" to={{
                                         pathname: "/thisquiz/"+quiz._id+"/"+currentuserid+"/"+currentusername
                                     }}>View</NavLink>
                     </div>

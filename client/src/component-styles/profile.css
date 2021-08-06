@@ -1,0 +1,23 @@
+.profile-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-quiz-card{
+    display: flex;
+    width: 30%;
+    border: 0.5px solid gainsboro;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;;
+}
+.profile-quiz-card *{
+    margin-right: 20px;
+}
+.links{
+    text-decoration: none;
+    color: #572790;
+}
+.links:hover{
+    color: #EC379E;
+}

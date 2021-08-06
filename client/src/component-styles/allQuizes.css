@@ -1,5 +1,6 @@
 #all-quiz-card-holder{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -8,8 +9,12 @@
     border-radius: 10px;
     width: 50%;
     padding: 20px;
+    margin: 10px 0;
 }
-
-#quiz-display{
-    /* display: none; */
+.links{
+    text-decoration: none;
+    color: #572790;
+}
+.links:hover{
+    color: #EC379E;
 }

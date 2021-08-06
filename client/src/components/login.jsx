@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import '../component-styles/loginandregister.css';
 
 class Login extends Component {
     constructor(props) {
@@ -46,13 +47,19 @@ class Login extends Component {
 
     render(){
         return (
-            <form onSubmit={this.onSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input type="text" name="username" placeholder={this.state.username} onChange={this.onChangeUsername} required/>
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" placeholder={this.state.password} onChange={this.onChangePassword} required/>
-                <button type="submit">Login</button>
-            </form>
+            <div className="form-holder">
+                <form onSubmit={this.onSubmit}>
+                    <div>
+                        <label htmlFor="username">Username:</label>
+                        <input type="text" name="username" placeholder={this.state.username} onChange={this.onChangeUsername} required/>
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password:</label>
+                        <input type="password" name="password" placeholder={this.state.password} onChange={this.onChangePassword} required/>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         );
     }
 }
