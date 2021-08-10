@@ -14,6 +14,7 @@ import CreateQuiz from './createQuiz';
 import QuizesCreated from './quizesCreated';
 import QuizesTaken from './quizesTaken';
 import Profile from './profile';
+// import PopupMessage from './popupMessage';
 
 class Main extends Component{
     // currentUser = "";
@@ -42,10 +43,11 @@ class Main extends Component{
                         <NavLink to="/" className="navigation-link">Home</NavLink>
                         <NavLink to={{pathname: "/getquiz/"+userid+"/"+user}}className="navigation-link">Quizes</NavLink>
                         <NavLink to={{pathname: "/createquiz/"+userid+"/"+user}} className="navigation-link">Create</NavLink>
-                        <div class="float-right">
+                        <div className="float-right">
                             <NavLink to={{pathname: "/userprofile/"+userid+"/"+user}} className="navigation-link">{this.state.currentUser.user}</NavLink>
                             <button onClick={this.logout} className="logout-button">Logout</button>
                         </div>
+                        {/* <NavLink to="/popup" className="navigation-link">Popup</NavLink> */}
                     </nav>
     
                     <div>
@@ -56,6 +58,7 @@ class Main extends Component{
                         <Route path="/userprofile/:currentuserid/:currentusername" component={Profile}></Route>
                         <Route path="/quizescreated/:currentuserid/:currentusername" component={QuizesCreated}></Route>
                         <Route path="/quizestaken/:currentuserid/:currentusername" component={QuizesTaken}></Route>
+                        {/* <Route path="/popup" component={PopupMessage}></Route> */}
                     </div>
             </HashRouter>
             );
@@ -65,7 +68,7 @@ class Main extends Component{
                 <HashRouter>
                     <nav className="navigation">
                         <NavLink to="/" className="navigation-link">Home</NavLink>
-                        <div class="float-right">
+                        <div className="float-right">
                             <NavLink to="/register" className="navigation-link">Register</NavLink>
                             <NavLink to="/login" className="navigation-link">Login</NavLink> 
                         </div>                         

@@ -1,86 +1,72 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../component-styles/createQuiz.css';
+import PopupMessage from './popupMessage';
 
-class CreateQuiz extends Component {
+const CreateQuiz = (props) => {
 
-  currentuserid = this.props.match.params.currentuserid;
-  currentusername = this.props.match.params.currentusername;
+  let currentuserid = props.match.params.currentuserid;
+  let currentusername = props.match.params.currentusername;
+  let questions = [];
+  let popup = null;
+  
+  const [title,settitle] = useState("");
+  const [question,setquestion] = useState("");
+  const [answers,setanswers] = useState([]);
+  const [correctanswer,setcorrectanswer] = useState("");
+  const [popupstateaddanswer,setpopupstateaddanswer] = useState(false);
+  const [popupstateaddquiz,setpopupstateaddquiz] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.onChangeTitle=this.onChangeTitle.bind(this);
-    this.onChangeQuestion=this.onChangeQuestion.bind(this);
-    this.onChangeAnswers=this.onChangeAnswers.bind(this);
-    this.onChangeCorrectAnswer=this.onChangeCorrectAnswer.bind(this);
-    this.onSubmitFinal=this.onSubmitFinal.bind(this);
-    this.onSubmit=this.onSubmit.bind(this);
-    this.saveTitle=this.saveTitle.bind(this);
-    //states
-    this.state={
-      title: "",
-      question: "",
-      answers: [],
-      correctAnswer: "",
-    }
-    //varaible
-    this.questions = [];
+  const showanswerpopup = () => {
+    setpopupstateaddanswer(true);
   }
-
+  const showquizpopup = () => {
+    setpopupstateaddquiz(true);
+  }
   //set states on change of target values in form
-  onChangeTitle(e){
-    this.setState({
-      title: e.target.value
-    })
+  const onChangeTitle = (e) => {
+      settitle(e.target.value)
   }
-  onChangeQuestion(e){
-    this.setState({
-      question: e.target.value
-    })
+  const onChangeQuestion = (e) => {
+      setquestion(e.target.value)
   }
-  onChangeAnswers(e){
+  const onChangeAnswers = (e) => {
     const val = e.target.value;
     let answers1 = val.split(",");
-    this.setState({
-     answers: answers1
-    })
+    setanswers(answers1)
   }
-  onChangeCorrectAnswer(e){
-    this.setState({
-      correctAnswer: e.target.value
-    })
+  const onChangeCorrectAnswer = (e) => {
+    setcorrectanswer(e.target.value);
   }
+
   //on saving a question
-  async onSubmit(e){
+  const onSubmit = (e) => {
     e.preventDefault();
     const question = {
-      "question": this.state.question,
-      "answers": this.state.answers,
-      "correctAnswer": this.state.correctAnswer
+      "question": question,
+      "answers": answers,
+      "correctAnswer": correctanswer
     };
-    this.questions.push(question);
-    alert("added!");
+    questions.push(question);
     //reset to original
-    this.setState({
-      question: "",
-      answers: [],
-      correctAnswer: ""
-    })
+    setquestion("");
+    setanswers([]);
+    setcorrectanswer("");
   }
   //on submiting the enitre quiz
-  async onSubmitFinal(e) {
+  const onSubmitFinal = async (e) => {
     e.preventDefault();
     //if user has not saved the final question
-    if(!(this.state.question=="" || this.state.answers=="" || this.state.correctAnswer=="")){
+    if(!(question=="" || answers=="" || correctanswer=="")){
       alert("save the question first");
       return;
     }
     //create a quiz object to send to db/server
     const quiz = {
-      "creatoruserid": this.currentuserid,//get the current logged in user
-      "creatorusername": this.currentusername,
-      "title": this.state.title,
-      "questions": this.questions
+      "creatoruserid": currentuserid,//get the current logged in user
+      "creatorusername": currentusername,
+      "title": title,
+      "questions": questions
     }
     try{
       //http request to the server 
@@ -90,34 +76,42 @@ class CreateQuiz extends Component {
         console.log(error);
     }
   }
-  saveTitle(){
+  const saveTitle = () => {
     document.getElementById("title").style.display = "none";
     document.getElementById("question-form").style.display = "flex";
   }
 
-  render(){
-    return (
-      <div id="display">
-        <div id="title">
-          <input type="text" value={this.state.title} onChange={this.onChangeTitle} placeholder="Title of Quiz" required/>
-          <button onClick={this.saveTitle}>Next</button>
-        </div>
-        <div id="question-form">
-        <form onSubmit={this.onSubmit}>
-          {/* <h1>{this.state.title}</h1> */}
-          <label htmlFor="question">Question:</label>
-          <input type="text" name="question" value={this.state.question} onChange={this.onChangeQuestion} placeholder="What is the capital of France" required/>
-          <label htmlFor="answers">Answers:</label>
-          <input type="text" name="answers" value={this.state.answers} onChange={this.onChangeAnswers} placeholder="Paris, London, Wales, Sydney" required/>
-          <label htmlFor="correct-answer">Correct Answer:</label>
-          <input type="text" name="correct-answer" value={this.state.correctAnswer} onChange={this.onChangeCorrectAnswer} placeholder="Paris" required/>
-          <button type="submit">Add Question</button>
-        </form>
-        <button id="submit-quiz-button" onClick={this.onSubmitFinal}>Create Quiz</button>
-        </div>
-      </div>
-    );
+  if(popupstateaddanswer){
+    popup = <PopupMessage message="The question has been added" popupstate={popupstateaddanswer}/> 
+    setTimeout(() => setpopupstateaddanswer(false), 5000);
   }
+  else if(popupstateaddquiz){
+    popup = <PopupMessage message="The quiz has been created" popupstate={popupstateaddquiz}/>
+    setTimeout(() => setpopupstateaddquiz(false), 5000);
+  }
+
+  return (
+    <div id="display">
+      <div id="title">
+        <input type="text" value={title} onChange={onChangeTitle} placeholder="Title of Quiz" required/>
+        <button onClick={saveTitle}>Next</button>
+      </div>
+      <div id="question-form">
+      <form onSubmit={onSubmit}>
+        <label htmlFor="question">Question:</label>
+        <input type="text" name="question" value={question} onChange={onChangeQuestion} placeholder="What is the capital of France" required/>
+        <label htmlFor="answers">Answers:</label>
+        <input type="text" name="answers" value={answers} onChange={onChangeAnswers} placeholder="Paris, London, Wales, Sydney" required/>
+        <label htmlFor="correct-answer">Correct Answer:</label>
+        <input type="text" name="correct-answer" value={correctanswer} onChange={onChangeCorrectAnswer} placeholder="Paris" required/>
+        <button type="submit" onClick={showanswerpopup}>Add Question</button>
+      </form>
+      {popup}
+      <button id="submit-quiz-button" onClick={onSubmitFinal} onClick={showquizpopup}>Create Quiz</button>
+      </div>
+    </div>
+  );
 }
+
 
 export default CreateQuiz;

@@ -1,0 +1,26 @@
+.popup-card-holder{
+    height: 45vh;
+    background: transparent;
+    position: relative;
+}
+.popup-card{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    padding: 10px;
+    background: #572790;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+}
+.image{
+    margin-left: auto;
+}
+.image img{
+    height: 10px;
+    width: 10px;
+}
