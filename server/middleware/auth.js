@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
+// const auth = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token){
     console.log("no token");
@@ -19,3 +20,18 @@ module.exports = async (req, res, next) => {
     return res.status(400).send(err.message);
   }
 };
+
+// const authorizeRoles = (...roles) => {
+//   return (req, res, next) => {
+//     if (!roles.includes(req.user.role)) {
+//       throw new Error(
+//         `Roles(${req.user.role}) is not allowed to access this resource,`
+//       );
+//     }
+//     next();
+//   };
+// };
+
+// const authorizeRoles = (...roles)
+
+// module.exports = { auth, authorizeRoles };
